@@ -1,0 +1,28 @@
+body {
+  background-color: black;
+}
+
+.roboto-bold {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.register-btn {
+    background-color: #1d9bf0;
+}
+.register-btn:hover {
+    background-color: #1d9bf0;
+}
+.text-size-agree {
+    font-size: x-small;
+}
+
+.signin-btn:hover {
+    background-color: rgba(10, 10, 10, 0.172);
+
+}
+
+.signin-btn {
+    color: #1d9bf0;
+}
