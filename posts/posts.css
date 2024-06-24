@@ -1,1 +1,45 @@
-/* Posts Page CSS */
+body {
+  background-color: black !important;
+  color: white;
+}
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+.content {
+  height: 2000px;
+}
+
+.line-l {
+  border-right: 0.5px solid #272828;
+  font-size: 1.5rem;
+}
+
+.line-m {
+  border-right: 0.5px solid #272828;
+}
+
+.line-r {
+  border-left: 0.5px solid #272828;
+}
+
+.custom-rounded {
+  border-radius: 10px;
+}
+
+.text-bold {
+  font-weight: 900;
+}
+
+.btn-blue {
+  background-color: #1d9bf0;
+  border-radius: 20px;
+  color: white;
+  font-weight: 700;
+}
+
+.v-color {
+    background-color: #1d9bf0;
+}
