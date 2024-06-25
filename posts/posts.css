@@ -41,5 +41,20 @@ body {
 }
 
 .v-color {
-    background-color: #1d9bf0;
+  background-color: #1d9bf0;
+}
+
+.card-border {
+  border: 1px solid #404242;
+  border-radius: 15px;
+  background-color: black;
+}
+
+.search-bg {
+    background-color: #222428;
+}
+
+.like-btn {
+    background-color: #f91880;
+    color: white;
 }
