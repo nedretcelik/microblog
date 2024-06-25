@@ -218,7 +218,7 @@
         <div class="col-md-6 content line-m">
           <div class="container">
             <div id="postCardDiv">
-              <div class="row">
+              <!-- <div class="row">
                 <div class="col-md-12">
                   <div class="card mb-3 card-border">
                     <div class="card-body">
@@ -248,8 +248,7 @@
                     </div>
                   </div>
                 </div>
-              </div> 
-              
+              </div> -->
             </div>
           </div>
         </div>
@@ -258,15 +257,8 @@
             <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 350px">
               <div>
                 <ul class="nav nav-pills flex-column mb-auto">
-                  <li>
-                    <div class="mb-4">
-                      <div class="card card-border">
-                        <div class="card-body">
-                          
-                          <a id="" href="#" class="btn btn-blue">Logout</a>
-                        </div>
-                      </div>
-                    </div>
+                  <li class="mb-3">
+                    <a id="logoutButton" href="#" class="btn btn-blue">Logout</a>
                   </li>
                   <li class="nav-item">
                     <div class="mb-4">
@@ -453,6 +445,11 @@
     </div>
 
     <!-- Page-specific code -->
+    <script>
+      logoutButton.onclick = () => {
+        logout();
+      };
+    </script>
     <script src="posts.js"></script>
   </body>
 </html>
