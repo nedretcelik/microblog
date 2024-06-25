@@ -2,6 +2,8 @@
 
 window.onload = function () {
   const postCardDiv = document.querySelector("#postCardDiv");
+  const postTextArea = document.querySelector("#postTextArea");
+  const createPostButton = document.querySelector("#createPostButton");
 
   function displayPosts() {
     fetch("http://microbloglite.us-east-2.elasticbeanstalk.com/api/posts/", {
@@ -13,6 +15,7 @@ window.onload = function () {
     })
       .then((response) => response.json())
       .then((posts) => {
+        postCardDiv.innerText = ""
         for (const post of posts) {
           let div1 = document.createElement("div");
           div1.classList.add("row");
@@ -100,5 +103,27 @@ window.onload = function () {
       });
   }
 
+  function createPost() {
+    let post = {
+      text: postTextArea.value,
+    };
+    let requestInit = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization":
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5lZHJldGMiLCJpYXQiOjE3MTkzMzQ0MTcsImV4cCI6MTcxOTQyMDgxN30.rWNQyF3x47STLrY6DYXMKF8iJo3gHp1QkuJF1UMxIoc",
+      },
+      body: JSON.stringify(post),
+    };
+    fetch("http://microbloglite.us-east-2.elasticbeanstalk.com/api/posts", requestInit)
+      .then((response) => response.json())
+      .then((post) => {
+        postTextArea.value = ""
+        displayPosts();
+      });
+  }
+
+  createPostButton.onclick = createPost;
   displayPosts();
 };
