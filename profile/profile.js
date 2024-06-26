@@ -29,10 +29,6 @@ if (editProfileA) {
   editProfileA.href = `/profile/edit-profile.html?username=${username}`;
 }
 
-if (updateUserInfo) {
-  updateUserInfo.href = `/profile/profile.html?username=${username}`;
-}
-
 function getUserData() {
   console.log("xyz");
   fetch(`http://microbloglite.us-east-2.elasticbeanstalk.com/api/users/${username}`, {
@@ -67,6 +63,7 @@ function displayUsersPostOnly() {
     .then((response) => response.json())
     .then((posts) => {
       const userPosts = posts.filter((post) => post.username == username);
+      postCardDiv.innerText = "";
       for (const post of userPosts) {
         let div1 = document.createElement("div");
         div1.classList.add("row");
@@ -153,10 +150,33 @@ function displayUsersPostOnly() {
       }
     });
 }
-function editUserInformation() {}
+
+function editUserInformation() {
+  let user = {
+    fullName: fullNameEdit.value,
+    bio: bioEdit.value,
+  };
+  let requestInit = {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${JSON.parse(window.localStorage.getItem("login-data")).token}`
+    },
+    body: JSON.stringify(user),
+  };
+  fetch(`http://microbloglite.us-east-2.elasticbeanstalk.com/api/users/${username}`, requestInit)
+    .then((response) => response.json())
+    .then((user) => {
+      window.location.href = `/profile/profile.html?username=${username}`;
+    });
+}
 
 if (fullNameH1) {
   displayUsersPostOnly();
+}
+
+if (updateUserInfo) {
+  updateUserInfo.onclick = editUserInformation;
 }
 
 getUserData();
