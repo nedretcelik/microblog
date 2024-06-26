@@ -4,13 +4,14 @@ window.onload = function () {
   const postCardDiv = document.querySelector("#postCardDiv");
   const postTextArea = document.querySelector("#postTextArea");
   const createPostButton = document.querySelector("#createPostButton");
+  const userProfileID = document.querySelector("#userProfileID");
 
   function displayPosts() {
     fetch("http://microbloglite.us-east-2.elasticbeanstalk.com/api/posts/", {
       method: "GET",
       headers: {
         Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5lZHJldGMiLCJpYXQiOjE3MTkzMzQ0MTcsImV4cCI6MTcxOTQyMDgxN30.rWNQyF3x47STLrY6DYXMKF8iJo3gHp1QkuJF1UMxIoc",
+          `Bearer ${JSON.parse(window.localStorage.getItem("login-data")).token}`,
       },
     })
       .then((response) => response.json())
@@ -73,6 +74,8 @@ window.onload = function () {
           spanUsername.style.fontSize = "0.9em";
           spanUsername.textContent = `@${post.username}`;
           div7.appendChild(spanUsername);
+          
+          
 
           let postTextP = document.createElement("p");
           postTextP.classList.add("card-text");
@@ -102,8 +105,8 @@ window.onload = function () {
         }
       });
   }
-
   function createPost() {
+    const token = localStorage
     let post = {
       text: postTextArea.value,
     };
@@ -112,7 +115,7 @@ window.onload = function () {
       headers: {
         "Content-Type": "application/json",
         "Authorization":
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5lZHJldGMiLCJpYXQiOjE3MTkzMzQ0MTcsImV4cCI6MTcxOTQyMDgxN30.rWNQyF3x47STLrY6DYXMKF8iJo3gHp1QkuJF1UMxIoc",
+          `Bearer ${JSON.parse(window.localStorage.getItem("login-data")).token}`,
       },
       body: JSON.stringify(post),
     };
