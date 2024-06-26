@@ -13,24 +13,19 @@ userProfileID.href = `/profile/profile.html?username=${username}`;
 homeLink.href = `/posts/posts.html?username=${username}`;
 logoLink.href = `/posts/posts.html?username=${username}`;
 
-
-
 function getUserData() {
-    fetch(`http://microbloglite.us-east-2.elasticbeanstalk.com/api/users/${username}`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${JSON.parse(window.localStorage.getItem("login-data")).token}`,
-        },
-      })
-        .then((response) => response.json())
-        .then((user) => {
-            console.log(user)
-            fullNameH1.textContent = user.fullName;
-            usernameH6.textContent = "@" + user.username;
-            bioTextP.textContent = user.bio;
-
-        })
-
+  fetch(`http://microbloglite.us-east-2.elasticbeanstalk.com/api/users/${username}`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${JSON.parse(window.localStorage.getItem("login-data")).token}`,
+    },
+  })
+    .then((response) => response.json())
+    .then((user) => {
+      fullNameH1.textContent = user.fullName;
+      usernameH6.textContent = "@" + user.username;
+      bioTextP.textContent = user.bio;
+    });
 }
 
 function displayUsersPostOnly() {
