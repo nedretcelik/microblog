@@ -7,9 +7,12 @@ window.onload = function () {
   const userProfileID = document.querySelector("#userProfileID");
   const homeLink = document.querySelector("#homeLink");
   const logoLink = document.querySelector("#logoLink");
+  const usernameNav = document.querySelector("#usernameNav");
 
   const urlParams = new URLSearchParams(window.location.search);
   const username = urlParams.get("username");
+
+  usernameNav.innerText = username;
 
   userProfileID.href = `/profile/profile.html?username=${username}`;
   homeLink.href = `/posts/posts.html?username=${username}`;

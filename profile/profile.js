@@ -11,9 +11,12 @@ const updateUserInfo = document.querySelector("#updateUserInfo");
 const fullNameEdit = document.querySelector("#fullNameEdit");
 const usernameEdit = document.querySelector("#usernameEdit");
 const bioEdit = document.querySelector("#bioEdit");
+const usernameNav = document.querySelector("#usernameNav");
 
 const urlParams = new URLSearchParams(window.location.search);
 const username = urlParams.get("username");
+
+usernameNav.innerText = username;
 
 if (userProfileID) {
   userProfileID.href = `/profile/profile.html?username=${username}`;
