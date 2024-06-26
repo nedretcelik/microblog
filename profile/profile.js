@@ -5,15 +5,36 @@ const logoLink = document.querySelector("#logoLink");
 const fullNameH1 = document.querySelector("#fullNameH1");
 const usernameH6 = document.querySelector("#usernameH6");
 const bioTextP = document.querySelector("#bioTextP");
+const editProfileA = document.querySelector("#editProfileA");
+const updateUserInfo = document.querySelector("#updateUserInfo");
+
+const fullNameEdit = document.querySelector("#fullNameEdit");
+const usernameEdit = document.querySelector("#usernameEdit");
+const bioEdit = document.querySelector("#bioEdit");
 
 const urlParams = new URLSearchParams(window.location.search);
 const username = urlParams.get("username");
 
-userProfileID.href = `/profile/profile.html?username=${username}`;
-homeLink.href = `/posts/posts.html?username=${username}`;
-logoLink.href = `/posts/posts.html?username=${username}`;
+if (userProfileID) {
+  userProfileID.href = `/profile/profile.html?username=${username}`;
+}
+
+if (homeLink) {
+  homeLink.href = `/posts/posts.html?username=${username}`;
+}
+if (logoLink) {
+  logoLink.href = `/posts/posts.html?username=${username}`;
+}
+if (editProfileA) {
+  editProfileA.href = `/profile/edit-profile.html?username=${username}`;
+}
+
+if (updateUserInfo) {
+  updateUserInfo.href = `/profile/profile.html?username=${username}`;
+}
 
 function getUserData() {
+  console.log("xyz");
   fetch(`http://microbloglite.us-east-2.elasticbeanstalk.com/api/users/${username}`, {
     method: "GET",
     headers: {
@@ -22,9 +43,17 @@ function getUserData() {
   })
     .then((response) => response.json())
     .then((user) => {
-      fullNameH1.textContent = user.fullName;
-      usernameH6.textContent = "@" + user.username;
-      bioTextP.textContent = user.bio;
+      if (fullNameH1) {
+        fullNameH1.textContent = user.fullName;
+        usernameH6.textContent = "@" + user.username;
+        bioTextP.textContent = user.bio;
+      }
+
+      if (fullNameEdit) {
+        fullNameEdit.value = user.fullName;
+        usernameEdit.value = user.username;
+        bioEdit.value = user.bio;
+      }
     });
 }
 
@@ -124,5 +153,10 @@ function displayUsersPostOnly() {
       }
     });
 }
-displayUsersPostOnly();
+function editUserInformation() {}
+
+if (fullNameH1) {
+  displayUsersPostOnly();
+}
+
 getUserData();
