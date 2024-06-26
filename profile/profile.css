@@ -1,5 +1,14 @@
 .profil-bg {
-    width: 598px;
-    height: 200px;
+  width: 598px;
+  height: 200px;
 }
 
+.custom-bg-a:hover {
+    background-color: rgb(43, 42, 42);
+    padding: 10px;
+    text-decoration: none;
+}
+
+.custom-bg-a {
+    text-decoration: none;
+}

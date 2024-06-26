@@ -5,18 +5,29 @@ window.onload = function () {
   const postTextArea = document.querySelector("#postTextArea");
   const createPostButton = document.querySelector("#createPostButton");
   const userProfileID = document.querySelector("#userProfileID");
+  const homeLink = document.querySelector("#homeLink");
+  const logoLink = document.querySelector("#logoLink");
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const username = urlParams.get("username");
+  
+  userProfileID.href = `/profile/profile.html?username=${username}`
+  homeLink.href = `/posts/posts.html?username=${username}`
+  logoLink.href = `/posts/posts.html?username=${username}`
+
+
+
 
   function displayPosts() {
     fetch("http://microbloglite.us-east-2.elasticbeanstalk.com/api/posts/", {
       method: "GET",
       headers: {
-        Authorization:
-          `Bearer ${JSON.parse(window.localStorage.getItem("login-data")).token}`,
+        Authorization: `Bearer ${JSON.parse(window.localStorage.getItem("login-data")).token}`,
       },
     })
       .then((response) => response.json())
       .then((posts) => {
-        postCardDiv.innerText = ""
+        postCardDiv.innerText = "";
         for (const post of posts) {
           let div1 = document.createElement("div");
           div1.classList.add("row");
@@ -74,8 +85,6 @@ window.onload = function () {
           spanUsername.style.fontSize = "0.9em";
           spanUsername.textContent = `@${post.username}`;
           div7.appendChild(spanUsername);
-          
-          
 
           let postTextP = document.createElement("p");
           postTextP.classList.add("card-text");
@@ -106,7 +115,6 @@ window.onload = function () {
       });
   }
   function createPost() {
-    const token = localStorage
     let post = {
       text: postTextArea.value,
     };
@@ -114,15 +122,14 @@ window.onload = function () {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization":
-          `Bearer ${JSON.parse(window.localStorage.getItem("login-data")).token}`,
+        Authorization: `Bearer ${JSON.parse(window.localStorage.getItem("login-data")).token}`,
       },
       body: JSON.stringify(post),
     };
     fetch("http://microbloglite.us-east-2.elasticbeanstalk.com/api/posts", requestInit)
       .then((response) => response.json())
       .then((post) => {
-        postTextArea.value = ""
+        postTextArea.value = "";
         displayPosts();
       });
   }
