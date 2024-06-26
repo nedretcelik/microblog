@@ -2,6 +2,9 @@ const postCardDiv = document.querySelector("#postCardDiv");
 const userProfileID = document.querySelector("#userProfileID");
 const homeLink = document.querySelector("#homeLink");
 const logoLink = document.querySelector("#logoLink");
+const fullNameH1 = document.querySelector("#fullNameH1");
+const usernameH6 = document.querySelector("#usernameH6");
+const bioTextP = document.querySelector("#bioTextP");
 
 const urlParams = new URLSearchParams(window.location.search);
 const username = urlParams.get("username");
@@ -9,6 +12,26 @@ const username = urlParams.get("username");
 userProfileID.href = `/profile/profile.html?username=${username}`;
 homeLink.href = `/posts/posts.html?username=${username}`;
 logoLink.href = `/posts/posts.html?username=${username}`;
+
+
+
+function getUserData() {
+    fetch(`http://microbloglite.us-east-2.elasticbeanstalk.com/api/users/${username}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${JSON.parse(window.localStorage.getItem("login-data")).token}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((user) => {
+            console.log(user)
+            fullNameH1.textContent = user.fullName;
+            usernameH6.textContent = "@" + user.username;
+            bioTextP.textContent = user.bio;
+
+        })
+
+}
 
 function displayUsersPostOnly() {
   fetch("http://microbloglite.us-east-2.elasticbeanstalk.com/api/posts/", {
@@ -107,3 +130,4 @@ function displayUsersPostOnly() {
     });
 }
 displayUsersPostOnly();
+getUserData();
