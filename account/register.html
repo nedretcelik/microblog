@@ -19,29 +19,31 @@
 
     <title>Register</title>
   </head>
-  <body>
+  <body style="background-color: black">
     <header>
       <nav></nav>
     </header>
 
     <main>
       <div class="container">
-        <div class="container mt-5" style="width: 500px">
-          <form>
-            <div class="mb-3">
-              <label for="newFullName" class="form-label">Full Name</label>
-              <input  type="text" class="form-control" id="newFullName" aria-describedby="emailHelp">
-            </div>
-            <div class="mb-3">
-              <label for="newUsername" class="form-label">Username</label>
-              <input type="text" class="form-control" id="newUsername" aria-describedby="emailHelp">
-            </div>
-            <div class="mb-3">
-              <label for="newpassword" class="form-label">Password</label>
-              <input type="password" class="form-control" id="newpassword">
-            </div>
-            <a id="registerButton" type="submit" class="btn btn-primary">Register</a>
-          </form>
+        <div class="container d-flex justify-content-center mt-5">
+          <img src="../images/logo-home.png" alt="" width="50">
+        </div>
+        <div class="container mt-5 p-4" style="width: 500px; background-color: white;" >
+          <div class="mb-3">
+            <label for="newFullName" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="newFullName" aria-describedby="emailHelp" />
+          </div>
+          <div class="mb-3">
+            <label for="newUsername" class="form-label">Username</label>
+            <input type="text" class="form-control" id="newUsername" aria-describedby="emailHelp" />
+          </div>
+          <div class="mb-3">
+            <label for="newpassword" class="form-label">Password</label>
+            <input type="password" class="form-control" id="newpassword" />
+          </div>
+          <a id="registerButton" type="submit" class="btn btn-primary">Register</a>
+        </div>
       </div>
     </main>
 
