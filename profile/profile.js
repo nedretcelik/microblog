@@ -12,6 +12,7 @@ const fullNameEdit = document.querySelector("#fullNameEdit");
 const usernameEdit = document.querySelector("#usernameEdit");
 const bioEdit = document.querySelector("#bioEdit");
 const usernameNav = document.querySelector("#usernameNav");
+const postLink = document.querySelector("#postLink");
 
 const urlParams = new URLSearchParams(window.location.search);
 const username = urlParams.get("username");
@@ -30,6 +31,9 @@ if (userProfileID) {
 
 if (homeLink) {
   homeLink.href = `/posts/posts.html?username=${myUsername}`;
+}
+if (homeLink) {
+  postLink.href = `/posts/posts.html?username=${myUsername}`;
 }
 if (logoLink) {
   logoLink.href = `/posts/posts.html?username=${myUsername}`;
