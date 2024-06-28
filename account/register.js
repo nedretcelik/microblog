@@ -8,9 +8,9 @@ window.onload = function () {
   const confirmPassword = document.querySelector("#confirmPassword");
 
   function createNewUser() {
-    if(newpassword.value !== confirmPassword.value) {
-      alert("Password does not match")
-      return
+    if (newpassword.value !== confirmPassword.value) {
+      alert("Password does not match");
+      return;
     }
     let user = {
       fullName: newFullName.value,
@@ -27,8 +27,11 @@ window.onload = function () {
     fetch("http://microbloglite.us-east-2.elasticbeanstalk.com/api/users", requestInit)
       .then((response) => response.json())
       .then((user) => {
-       console.log("done")
-        window.location.href = `/account/login.html`;
+        if (user.statusCode == 409) {
+          alert(user.message);
+        } else {
+          window.location.href = `/account/login.html`;
+        }
       });
   }
 
