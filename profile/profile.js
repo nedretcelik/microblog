@@ -29,14 +29,19 @@ if (userProfileID) {
 }
 
 if (homeLink) {
-  homeLink.href = `/posts/posts.html?username=${username}`;
+  homeLink.href = `/posts/posts.html?username=${myUsername}`;
 }
 if (logoLink) {
-  logoLink.href = `/posts/posts.html?username=${username}`;
+  logoLink.href = `/posts/posts.html?username=${myUsername}`;
 }
 if (editProfileA) {
   editProfileA.href = `/profile/edit-profile.html?username=${username}`;
 }
+
+if(myUsername !== username) {
+  editProfileA.style.display = "none"
+}
+
 
 function getUserData() {
   fetch(`http://microbloglite.us-east-2.elasticbeanstalk.com/api/users/${username}`, {

@@ -9,17 +9,13 @@ window.onload = function () {
   const logoLink = document.querySelector("#logoLink");
   const usernameNav = document.querySelector("#usernameNav");
 
-  const urlParams = new URLSearchParams(window.location.search);
-  const username = urlParams.get("username");
-
   const myUsername = getLoginData().username;
- 
 
   usernameNav.innerText = myUsername;
 
   userProfileID.href = `/profile/profile.html?username=${myUsername}`;
-  homeLink.href = `/posts/posts.html?username=${username}`;
-  logoLink.href = `/posts/posts.html?username=${username}`;
+  homeLink.href = `/posts/posts.html?username=${myUsername}`;
+  logoLink.href = `/posts/posts.html?username=${myUsername}`;
 
   function displayPosts() {
     fetch("http://microbloglite.us-east-2.elasticbeanstalk.com/api/posts/", {
@@ -78,7 +74,6 @@ window.onload = function () {
           let fullName = document.createElement("span");
           fullName.textContent = post.username;
           div7.appendChild(fullName);
-          
 
           let br = document.createElement("br");
           div7.appendChild(br);
