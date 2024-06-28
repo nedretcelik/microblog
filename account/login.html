@@ -16,7 +16,7 @@
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="../posts/posts.css">
+    <link rel="stylesheet" href="../posts/posts.css" />
 
     <title>Login</title>
 
@@ -28,9 +28,11 @@
       }
     </script>
   </head>
-  <body style="background-color: black;">
+  <body style="background-color: black">
     <div class="container d-flex justify-content-center mt-5">
-      <img src="../images/logo-home.png" alt="" width="50">
+      <a href="../index.html">
+        <img src="../images/logo-home.png" alt="" style="width: 50px" />
+      </a>
     </div>
     <div class="container mt-5">
       <main class="form-signin w-100 m-auto">
@@ -40,22 +42,22 @@
               <form id="login">
                 <div class="mb-3">
                   <label for="username" class="form-label">Username</label>
-                  <input type="text" class="form-control" id="username">
+                  <input type="text" class="form-control" id="username" />
                 </div>
                 <div class="mb-3">
                   <label for="password" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="password">
+                  <input type="password" class="form-control" id="password" />
                 </div>
                 <div class="mb-3 form-check">
-                  <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                  <input type="checkbox" class="form-check-input" id="exampleCheck1" />
                   <label class="form-check-label" for="exampleCheck1">Check me out</label>
                 </div>
                 <button id="loginButton" type="submit" class="btn btn-blue">Login</button>
               </form>
             </div>
           </div>
-          </div>
-        </main>
+        </div>
+      </main>
     </div>
 
     <footer></footer>
