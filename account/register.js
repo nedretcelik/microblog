@@ -5,8 +5,13 @@ window.onload = function () {
   const newUsername = document.querySelector("#newUsername");
   const newpassword = document.querySelector("#newpassword");
   const registerButton = document.querySelector("#registerButton");
+  const confirmPassword = document.querySelector("#confirmPassword");
 
   function createNewUser() {
+    if(newpassword.value !== confirmPassword.value) {
+      alert("Password does not match")
+      return
+    }
     let user = {
       fullName: newFullName.value,
       username: newUsername.value,
