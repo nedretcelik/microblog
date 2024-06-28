@@ -12,9 +12,11 @@ window.onload = function () {
   const urlParams = new URLSearchParams(window.location.search);
   const username = urlParams.get("username");
 
-  usernameNav.innerText = username;
+  const myUsername = getLoginData().username;
 
-  userProfileID.href = `/profile/profile.html?username=${username}`;
+  usernameNav.innerText = myUsername;
+
+  userProfileID.href = `/profile/profile.html?username=${myUsername}`;
   homeLink.href = `/posts/posts.html?username=${username}`;
   logoLink.href = `/posts/posts.html?username=${username}`;
 
@@ -59,7 +61,7 @@ window.onload = function () {
 
           let userNameA = document.createElement("a");
           userNameA.classList.add("text-white", "d-flex", "align-items-center");
-          userNameA.href = "#";
+          userNameA.href = `/profile/profile.html?username=${post.username}`;
           div6.appendChild(userNameA);
 
           let userImage = document.createElement("img");
@@ -108,9 +110,85 @@ window.onload = function () {
 
           svg.appendChild(path);
           div4.appendChild(svg);
-          svg.addEventListener("click", function () {
+          svg.onclick = function addAndRemoveLikes() {
+            if (post.likes.find((user) => user.username == myUsername)) {
+              let requestInit = {
+                method: "DELETE",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${JSON.parse(window.localStorage.getItem("login-data")).token}`,
+                },
+              };
+              fetch(
+                `http://microbloglite.us-east-2.elasticbeanstalk.com/api/likes/${
+                  post.likes.find((user) => user.username == myUsername)._id
+                }`,
+                requestInit
+              )
+                .then((response) => response.json())
+                .then((post) => {
+                  displayPosts();
+                });
+            } else {
+              let likes = {
+                postId: post._id,
+              };
+              let requestInit = {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${JSON.parse(window.localStorage.getItem("login-data")).token}`,
+                },
+                body: JSON.stringify(likes),
+              };
+              fetch("http://microbloglite.us-east-2.elasticbeanstalk.com/api/likes", requestInit)
+                .then((response) => response.json())
+                .then((likes) => {
+                  displayPosts();
+                });
+            }
+          };
+
+          if (post.likes.find((user) => user.username == myUsername)) {
             svg.setAttribute("fill", "pink");
-          });
+            svg.setAttribute("class", "bi bi-heart-fill");
+            path.setAttribute("d", "M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314");
+          }
+
+          if (post.username == myUsername) {
+            let deleteIcon = document.createElementNS(svgNS, "svg");
+            deleteIcon.style.margin = "10px";
+            deleteIcon.style.cursor = "pointer";
+            deleteIcon.setAttribute("xmlns", svgNS);
+            deleteIcon.setAttribute("width", "16");
+            deleteIcon.setAttribute("height", "16");
+            deleteIcon.setAttribute("fill", "currentColor");
+            deleteIcon.setAttribute("class", "bi bi-trash");
+            deleteIcon.setAttribute("viewBox", "0 0 16 16");
+
+            let pathElement = document.createElementNS(svgNS, "path");
+            pathElement.setAttribute(
+              "d",
+              "M5.5 5.5A.5.5 0 0 1 6 5h4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1-.5-.5H6a.5.5 0 0 1-.5.5v7a.5.5 0 0 1-1 0v-7zM2.5 3a.5.5 0 0 1 .5-.5h.768l.276-1.106A1 1 0 0 1 5.018 1h5.964a1 1 0 0 1 .974.894L12.232 2.5H13a.5.5 0 0 1 0 1h-12a.5.5 0 0 1 0-1h.5v-1a.5.5 0 0 1 .5-.5zM4.118 2.5l.25-1H11.632l.25 1H4.118zM3 4.5v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-9h-10z"
+            );
+
+            deleteIcon.appendChild(pathElement);
+            div4.appendChild(deleteIcon);
+            deleteIcon.onclick = function deletePost() {
+              let requestInit = {
+                method: "DELETE",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${JSON.parse(window.localStorage.getItem("login-data")).token}`,
+                },
+              };
+              fetch(`http://microbloglite.us-east-2.elasticbeanstalk.com/api/posts/${post._id}`, requestInit)
+                .then((response) => response.json())
+                .then((post) => {
+                  displayPosts();
+                });
+            };
+          }
         }
       });
   }
