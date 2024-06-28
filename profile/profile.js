@@ -20,7 +20,9 @@ const myUsername = getLoginData().username;
 
 console.log(myUsername);
 
-usernameNav.innerText = myUsername;
+if (usernameNav) {
+  usernameNav.innerText = myUsername;
+}
 
 if (userProfileID) {
   userProfileID.href = `/profile/profile.html?username=${myUsername}`;
@@ -244,10 +246,10 @@ function editUserInformation() {
     },
     body: JSON.stringify(user),
   };
-  fetch(`http://microbloglite.us-east-2.elasticbeanstalk.com/api/users/${username}`, requestInit)
+  fetch(`http://microbloglite.us-east-2.elasticbeanstalk.com/api/users/${myUsername}`, requestInit)
     .then((response) => response.json())
     .then((user) => {
-      window.location.href = `/profile/profile.html?username=${username}`;
+      window.location.href = `/profile/profile.html?username=${myUsername}`;
     });
 }
 

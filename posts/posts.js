@@ -13,6 +13,7 @@ window.onload = function () {
   const username = urlParams.get("username");
 
   const myUsername = getLoginData().username;
+ 
 
   usernameNav.innerText = myUsername;
 
@@ -77,6 +78,7 @@ window.onload = function () {
           let fullName = document.createElement("span");
           fullName.textContent = post.username;
           div7.appendChild(fullName);
+          
 
           let br = document.createElement("br");
           div7.appendChild(br);
